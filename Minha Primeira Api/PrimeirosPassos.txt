@@ -1,0 +1,5 @@
+versao dotnet Core 2.2
+
+Rodando a api modo assistido 
+Diretorio da aplicacao
+dotnet watch run
