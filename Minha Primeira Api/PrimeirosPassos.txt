@@ -3,3 +3,7 @@ versao dotnet Core 2.2
 Rodando a api modo assistido 
 Diretorio da aplicacao
 dotnet watch run
+
+Analisadores e Convenções
+- Adciona a notacao conforme o retorno do metodo
+Microsoft.AspNetCore.Mvc.Api.Analyzers versao 2.2.0
