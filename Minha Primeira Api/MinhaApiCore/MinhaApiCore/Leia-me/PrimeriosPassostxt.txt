@@ -1,0 +1,18 @@
+﻿Criar uma pasta Model Projeto Api
+Criar ApiDbContext
+
+Alterar o startup.cs para registrar ApiDbContext
+Configurar ApiDbContext
+
+ConnectionString
+appsettings.json
+
+Gerar uma migration
+Add-Migration Initial
+
+Escrevendo a migracao no banco
+update-database
+
+Criar Controller
+Criar controller usando o template do entityFramework
+Atencao nao usar o teplate MVC e sim API
