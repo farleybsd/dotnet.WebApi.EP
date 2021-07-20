@@ -13,6 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Leia-me", "Leia-me", "{0747
 	ProjectSection(SolutionItems) = preProject
 		1.0 Setup.txt = 1.0 Setup.txt
 		2.0 DTO.txt = 2.0 DTO.txt
+		3.0 Controllers.txt = 3.0 Controllers.txt
+		4.0 AutoMapper.txt = 4.0 AutoMapper.txt
+		5.0 Depedencias.txt = 5.0 Depedencias.txt
+		6.0 EfCore.txt = 6.0 EfCore.txt
+		7.0 Create DB.txt = 7.0 Create DB.txt
 	EndProjectSection
 EndProject
 Global

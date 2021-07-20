@@ -1,0 +1,4 @@
+NO PROJETO DATA
+Microsoft.EntityFrameworkCore.Tools 2.2.0
+Microsoft.EntityFrameworkCore.Design 2.2.0
+RODAR update-database -verbose

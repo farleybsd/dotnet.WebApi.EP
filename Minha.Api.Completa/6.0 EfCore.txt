@@ -1,0 +1,23 @@
+[Registrando Ef]
+Editar o arquivo Startup
+ public void ConfigureServices(IServiceCollection services)
+ {
+            services.AddDbContext<MeuDbContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+            
+}
+
+
+appsettings
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=VOSTROFARLEY\\SQLEXPRESS;Database=MinhaApiCore;User Id=cursos; Password=cursos; MultipleActiveResultSets=true"
+  }
+}

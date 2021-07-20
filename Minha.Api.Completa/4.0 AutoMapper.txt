@@ -1,0 +1,14 @@
+[Projeto Api]
+AutoMapper.Extensions.Microsoft.DependencyInjection  Version="6.1.0" 
+
+[Registrando o AutoMapper]
+Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+  services.AddAutoMapper(typeof(Startup));
+            
+}
+
+[Criando A lista De Para AutoMapper]
+Criar uma pasta Configuration
+                -> Dentro de  Configuration criar AutoMapperConfig

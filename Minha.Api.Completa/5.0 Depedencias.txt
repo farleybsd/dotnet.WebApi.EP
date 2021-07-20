@@ -1,0 +1,10 @@
+[Registrado Depedencias Do Projeto]
+Dentro da pasta Configuration
+				-> Criar o arquivo DependencyInjectionConfig
+
+[Registrado DependencyInjectionConfig]
+Startup.Config
+ public void ConfigureServices(IServiceCollection services)
+{
+	 services.ResolveDependencies();
+}
