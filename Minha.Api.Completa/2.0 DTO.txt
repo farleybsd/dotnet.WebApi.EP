@@ -1,0 +1,1 @@
+Criar uma pasta dentro do projeto Api -> ViewModels

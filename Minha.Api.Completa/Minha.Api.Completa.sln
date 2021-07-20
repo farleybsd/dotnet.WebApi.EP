@@ -11,7 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIo.Api", "src\DevIo.Api\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Leia-me", "Leia-me", "{074762BA-0A94-4EB6-B08E-89FE86302D6C}"
 	ProjectSection(SolutionItems) = preProject
-		Setup.txt = Setup.txt
+		1.0 Setup.txt = 1.0 Setup.txt
+		2.0 DTO.txt = 2.0 DTO.txt
 	EndProjectSection
 EndProject
 Global
