@@ -1,0 +1,9 @@
+1.0 Criando o Projeto
+1.1 Criar uma solucao em branco
+1.2 Dentro da solucao Criar uma pasta src
+1.3 Dentro da solucao Criar uma pasta sql
+1.4 Dentro da solucao Criar uma pasta tests
+1.5 Importar o projeto  DevIO.Business
+1.6 Importar o projeto  DevIO.Data
+1.6 Criar Novo  projeto Dentro src  DevIO.Api - (Asp.net Core Web Application)
+1.7 No projeto Api adc as referencias  DevIO.Business /   DevIO.Data
