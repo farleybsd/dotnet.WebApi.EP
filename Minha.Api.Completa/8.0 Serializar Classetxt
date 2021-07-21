@@ -1,0 +1,66 @@
+https://csharp2json.io/
+
+public class FornecedorViewModel
+    {
+        public Guid Id { get; set; }
+        public string Nome { get; set; }
+        public string Documento { get; set; }
+        public int TipoFornecedor { get; set; }
+        public EnderecoViewModel Endereco { get; set; }
+        public bool Ativo { get; set; }
+       
+    }
+ 
+    public class EnderecoViewModel
+    {
+        
+        public Guid Id { get; set; }
+        public string Logradouro { get; set; }
+        public string Numero { get; set; }
+        public string Complemento { get; set; }
+        public string Bairro { get; set; }
+        public string Cep { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
+        public Guid FornecedorId { get; set; }
+    }
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "nome": null,
+  "documento": null,
+  "tipoFornecedor": 0,
+  "endereco": null,
+  "ativo": false
+}
+
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "logradouro": null,
+  "numero": null,
+  "complemento": null,
+  "bairro": null,
+  "cep": null,
+  "cidade": null,
+  "estado": null,
+  "fornecedorId": "00000000-0000-0000-0000-000000000000"
+}
+
+
+{
+  "id": "c52be50f-fec5-41e9-8c6d-b18fdead7eb4",
+  "nome": "Casa Do Nerd",
+  "documento": "11405263679",
+  "tipoFornecedor": 1,
+  "endereco": {
+	  	"id": "5a650f03-1cea-409a-9f4d-e52eb05d3235",
+	  "logradouro": "Rua Teste",
+	  "numero": "123",
+	  "complemento": "a",
+	  "bairro": "Bairro Teste",
+	  "cep": "03188000",
+	  "cidade": "SÃO PAULO",
+	  "estado": "SP",
+	  "fornecedorId": "00000000-0000-0000-0000-000000000000"
+  },
+  "ativo": true
+}
