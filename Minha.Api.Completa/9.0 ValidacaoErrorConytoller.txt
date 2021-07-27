@@ -1,0 +1,10 @@
+Validacao erro no contoler
+Editar arquivo Startup.cs
+
+services.Configure<ApiBehaviorOptions>(options => {
+
+                options.SuppressModelStateInvalidFilter = true;
+            
+            });
+
+Editar ManController
