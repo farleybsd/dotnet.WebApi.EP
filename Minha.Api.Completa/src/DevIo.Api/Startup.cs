@@ -29,10 +29,10 @@ namespace DevIo.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
-            {
-                builder.WithOrigins("https://localhost:44336/").AllowAnyMethod().AllowAnyHeader();
-            }));
+            //services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            //{
+            //    builder.WithOrigins("https://localhost:44336/").AllowAnyMethod().AllowAnyHeader();
+            //}));
 
             services.AddDbContext<MeuDbContext>(options =>
             {
@@ -44,6 +44,17 @@ namespace DevIo.Api
             services.Configure<ApiBehaviorOptions>(options => {
 
                 options.SuppressModelStateInvalidFilter = true;
+            
+            });
+
+            services.AddCors(options => {
+
+                options.AddPolicy("Development",
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader()
+                                      .AllowCredentials()
+                    );
             
             });
 
@@ -63,7 +74,8 @@ namespace DevIo.Api
                 app.UseHsts();
             }
 
-            app.UseCors("ApiCorsPolicy");
+            //app.UseCors("ApiCorsPolicy");
+            app.UseCors("Development");
             app.UseMvc();
 
         }
