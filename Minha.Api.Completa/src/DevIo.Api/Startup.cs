@@ -39,6 +39,10 @@ namespace DevIo.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddAutoMapper(typeof(Startup));
+
+            services.WebApiConfig();
+
+            /*
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.Configure<ApiBehaviorOptions>(options => {
@@ -56,7 +60,7 @@ namespace DevIo.Api
                                       .AllowCredentials()
                     );
             
-            });
+            });*/
 
             services.ResolveDependencies();
         }
@@ -74,9 +78,10 @@ namespace DevIo.Api
                 app.UseHsts();
             }
 
+            app.UserMvcConfiguration();
             //app.UseCors("ApiCorsPolicy");
-            app.UseCors("Development");
-            app.UseMvc();
+            //app.UseCors("Development");
+            //app.UseMvc();
 
         }
     }

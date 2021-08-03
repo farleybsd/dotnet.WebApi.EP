@@ -154,5 +154,40 @@ namespace DevIo.Api.Controllers
             }
             return true;
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Atualizar(Guid id,ProdutoViewModel produtoViewModel)
+        {
+            if (id != produtoViewModel.Id)
+            {
+                NotificarErro("Os ids informados não são iguais");
+                return CustomerResponse();
+            }
+            var produtoAtualizacao = await ObterProduto(id);
+            produtoViewModel.Imagem = produtoAtualizacao.Imagem;
+
+            if (!ModelState.IsValid) return CustomerResponse(ModelState);
+
+            if (produtoViewModel.ImagemUpload !=null)
+            {
+                var imagemNome = Guid.NewGuid() + "-" + produtoViewModel.Imagem;
+                
+                if (!UploadArquivo(produtoViewModel.ImagemUpload,imagemNome))
+                {
+                    return CustomerResponse(ModelState);
+                }
+
+                produtoAtualizacao.Imagem = imagemNome;
+            }
+
+            produtoAtualizacao.Nome = produtoViewModel.Nome;
+            produtoAtualizacao.Descricao = produtoViewModel.Descricao;
+            produtoAtualizacao.Valor = produtoViewModel.Valor;
+            produtoAtualizacao.Ativo = produtoViewModel.Ativo;
+
+            await _produtoService.Atualizar(_mapper.Map<Produto>(produtoAtualizacao));
+
+            return CustomerResponse(produtoViewModel);
+        }
     }
 }
