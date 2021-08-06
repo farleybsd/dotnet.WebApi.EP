@@ -38,6 +38,8 @@ namespace DevIo.Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddIdentityConfiguration(Configuration);
             services.AddAutoMapper(typeof(Startup));
 
             services.WebApiConfig();
@@ -81,7 +83,8 @@ namespace DevIo.Api
             app.UserMvcConfiguration();
             //app.UseCors("ApiCorsPolicy");
             //app.UseCors("Development");
-            //app.UseMvc();
+            app.UseAuthentication(); // obs tem que vir antes do useMvc
+            app.UseMvc();
 
         }
     }

@@ -1,0 +1,9 @@
+Criar a classe IdentityConfig
+registrar na classe startup.cs 
+criar ApplicationDbContext
+gerar migrations Identity
+selecionar projeto da api
+add-migration Identity -Context ApplicationDbContext
+Gravando a migration no banco de dados
+update-database -Context ApplicationDbContext
+registrar na classe startup.cs autenticacao do mvc
