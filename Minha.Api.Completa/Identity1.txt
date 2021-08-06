@@ -7,3 +7,22 @@ add-migration Identity -Context ApplicationDbContext
 Gravando a migration no banco de dados
 update-database -Context ApplicationDbContext
 registrar na classe startup.cs autenticacao do mvc
+criar controller de autenticacao AuthController
+
+https://localhost:5001/api/nova-conta
+
+ {
+        "Email": "testeDois@teste.com",
+        "Password": "Teste@123",
+        "ConfirmPassWord": "Teste@123"
+        
+  }
+
+    https://localhost:5001/api/entrar
+
+    {
+        "Email": "testeDois@teste.com",
+        "Password": "Teste@123",
+        "ConfirmPassWord": "Teste@123"
+        
+    }
