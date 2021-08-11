@@ -1,10 +1,16 @@
-﻿using DevIo.Api.ViewModels;
+﻿using DevIo.Api.Extensions;
+using DevIo.Api.ViewModels;
 using DevIO.Business.Intefaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DevIo.Api.Controllers
@@ -14,13 +20,16 @@ namespace DevIo.Api.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly AppSettings _appSettings;
         public AuthController(INotificador notificador,
                               SignInManager<IdentityUser> signInManager,
+                              IOptions<AppSettings> appSettings,
                               UserManager<IdentityUser> userManager) : base(notificador)
         {
 
             _signInManager = signInManager;
             _userManager = userManager;
+            _appSettings = appSettings.Value;
         }
 
         [HttpPost("nova-conta")]
@@ -41,7 +50,7 @@ namespace DevIo.Api.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return CustomerResponse(registerUser);
+                return CustomerResponse(GerarJwt());
             }
 
             foreach (var error in result.Errors)
@@ -62,7 +71,7 @@ namespace DevIo.Api.Controllers
                                                                    true);
             if (result.Succeeded)
             {
-                return CustomerResponse(loginUser);
+                return CustomerResponse(GerarJwt());
             }
             if (result.IsLockedOut)
             {
@@ -71,6 +80,23 @@ namespace DevIo.Api.Controllers
             }
             NotificarErro("Usuario ou senha incoretos");
             return CustomerResponse(loginUser);
+        }
+
+        private string GerarJwt()
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var Key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
+            {
+                Issuer = _appSettings.Emissor,
+                Audience = _appSettings.ValidoEm,
+                Expires = DateTime.UtcNow.AddHours(_appSettings.ExpiracaoHoras),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Key), SecurityAlgorithms.HmacSha256Signature)
+
+            });
+            var encodedToken = tokenHandler.WriteToken(token);
+
+            return encodedToken;
         }
     }
 }

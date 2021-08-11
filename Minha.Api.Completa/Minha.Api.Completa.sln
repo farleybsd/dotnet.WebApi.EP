@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Leia-me", "Leia-me", "{0747
 		8.0 Serializar Classetxt = 8.0 Serializar Classetxt
 		9.0 ValidacaoErrorConytoller.txt = 9.0 ValidacaoErrorConytoller.txt
 		Identity1.txt = Identity1.txt
+		JWT.txt = JWT.txt
 	EndProjectSection
 EndProject
 Global
