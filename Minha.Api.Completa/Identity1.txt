@@ -26,3 +26,7 @@ https://localhost:5001/api/nova-conta
         "ConfirmPassWord": "Teste@123"
         
     }
+
+    Criar uma classe para traduzir o Identity 
+    IdentityMensagensPortugues
+    adicinar a classe nova nas configuracoes  Identity
