@@ -1,0 +1,7 @@
+Adicionando um Claims
+Selecionar um Usuario na tabela de user
+e ir na tabela de clains AspNetUserClaims
+
+Extedendo uma Claim no controller
+->
+Extensions -> CustomAuthorize
