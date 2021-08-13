@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,15 @@ namespace DevIo.Api.Configuration
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.Configure<ApiBehaviorOptions>(options => {
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
 
                 options.SuppressModelStateInvalidFilter = true;
 
             });
 
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
 
                 options.AddPolicy("Development",
                     builder => builder.AllowAnyOrigin()
@@ -28,16 +31,25 @@ namespace DevIo.Api.Configuration
                                       .AllowAnyHeader()
                                       .AllowCredentials()
                     );
+                options.AddPolicy("Production",
+                   builder =>
+                       builder
+                           .WithMethods("GET","Post")
+                           .WithOrigins("http://desenvolvedor.io","www.teste.com")
+                           .SetIsOriginAllowedToAllowWildcardSubdomains()
+                           //.WithHeaders(HeaderNames.ContentType, "x-custom-header")
+                           .AllowAnyHeader());
 
             });
+
             return services;
         }
 
         public static IApplicationBuilder UserMvcConfiguration(this IApplicationBuilder app)
         {
             app.UseHttpsRedirection();
-            app.UseCors("Development");
-            //app.UseMvc();
+            //app.UseCors("Development");
+            app.UseMvc();
             return app;
         }
     }

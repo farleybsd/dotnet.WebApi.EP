@@ -73,18 +73,21 @@ namespace DevIo.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("Development");
             }
             else
             {
+                app.UseCors("Production");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            app.UserMvcConfiguration();
+           
             //app.UseCors("ApiCorsPolicy");
             //app.UseCors("Development");
             app.UseAuthentication(); // obs tem que vir antes do useMvc
-            app.UseMvc();
+           // app.UseMvc();
+            app.UserMvcConfiguration();
 
         }
     }
