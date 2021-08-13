@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,7 +98,7 @@ namespace DevIo.Api.Controllers
         //    return encodedToken;
         //}
 
-        private async Task<string>GerarJwt(string Email)
+        private async Task<LoginResponseViewModel>GerarJwt(string Email)
         {
             // adicinando clains no jwt
             var user = await _userManager.FindByEmailAsync(Email);
@@ -132,7 +133,19 @@ namespace DevIo.Api.Controllers
             });
             var encodedToken = tokenHandler.WriteToken(token);
 
-            return encodedToken;
+            var response = new LoginResponseViewModel
+            {
+                AccessToken = encodedToken,
+                ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiracaoHoras).TotalSeconds,
+                UserToken = new UserTokenViewModel
+                {
+                    Id=user.Id,
+                    Email =user.Email,
+                    Claims=claims.Select(c=> new ClaimViewModel {Type=c.Type,Value=c.Value })
+                }
+            };
+
+            return response;
         }
         private static long ToUnixEpochDate(DateTime date)
             => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
