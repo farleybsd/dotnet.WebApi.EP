@@ -1,0 +1,13 @@
+Instalar no projeto da Api
+
+install-package Microsoft.AspNetCore.Mvc.Versioning versao 3.1.2
+install-package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer versao 3.2.0
+
+Adicionar o versionamento no ApiConfig.cs
+
+Alterar as Controllers
+
+http://localhost44320/api/v1/fornecedores
+
+
+Criar uma pasta com a versao para cada controller

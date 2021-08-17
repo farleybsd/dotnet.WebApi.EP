@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using DevIo.Api.Controllers;
 using DevIo.Api.ViewModels;
 using DevIO.Business.Intefaces;
 using DevIO.Business.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,9 +12,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DevIo.Api.Controllers
+namespace DevIo.Api.V1.Controllers
 {
-    [Route("api/produtos")]
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/produtos")]
     public class ProdutosController : MainController
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -22,7 +28,7 @@ namespace DevIo.Api.Controllers
                                   IProdutoRepository produtoRepository,
                                   IProdutoService produtoService,
                                   IUser user,
-                                  IMapper mapper) : base(notificador,user)
+                                  IMapper mapper) : base(notificador, user)
         {
             _produtoRepository = produtoRepository;
             _produtoService = produtoService;
@@ -63,7 +69,7 @@ namespace DevIo.Api.Controllers
 
             var imagemNome = Guid.NewGuid() + "_" + produtoViewModel.Imagem;
 
-            if(!UploadArquivo(produtoViewModel.ImagemUpload,imagemNome))
+            if (!UploadArquivo(produtoViewModel.ImagemUpload, imagemNome))
             {
                 return CustomerResponse(produtoViewModel);
             }
@@ -80,7 +86,7 @@ namespace DevIo.Api.Controllers
         {
             if (!ModelState.IsValid) return CustomerResponse(ModelState);
 
-            var imgPrefixo = Guid.NewGuid() + "_" ;
+            var imgPrefixo = Guid.NewGuid() + "_";
 
             if (!await UploadArquivoAlternativo(produtoViewModel.ImagemUpload, imgPrefixo))
             {
@@ -101,13 +107,13 @@ namespace DevIo.Api.Controllers
         {
             return Ok(file);
         }
-        private async Task<ProdutoViewModel>ObterProduto(Guid id)
+        private async Task<ProdutoViewModel> ObterProduto(Guid id)
         {
             var produto = _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterProdutoFornecedor(id));
             return produto;
         }
 
-        private bool UploadArquivo(string arquivo,string imgNome)
+        private bool UploadArquivo(string arquivo, string imgNome)
         {
             if (string.IsNullOrEmpty(arquivo))
             {
@@ -149,7 +155,7 @@ namespace DevIo.Api.Controllers
                 return false;
             }
 
-            using (var stream = new FileStream(path,FileMode.Create))
+            using (var stream = new FileStream(path, FileMode.Create))
             {
                 await arquivo.CopyToAsync(stream);
             }
@@ -157,7 +163,7 @@ namespace DevIo.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Atualizar(Guid id,ProdutoViewModel produtoViewModel)
+        public async Task<IActionResult> Atualizar(Guid id, ProdutoViewModel produtoViewModel)
         {
             if (id != produtoViewModel.Id)
             {
@@ -169,11 +175,11 @@ namespace DevIo.Api.Controllers
 
             if (!ModelState.IsValid) return CustomerResponse(ModelState);
 
-            if (produtoViewModel.ImagemUpload !=null)
+            if (produtoViewModel.ImagemUpload != null)
             {
                 var imagemNome = Guid.NewGuid() + "-" + produtoViewModel.Imagem;
-                
-                if (!UploadArquivo(produtoViewModel.ImagemUpload,imagemNome))
+
+                if (!UploadArquivo(produtoViewModel.ImagemUpload, imagemNome))
                 {
                     return CustomerResponse(ModelState);
                 }

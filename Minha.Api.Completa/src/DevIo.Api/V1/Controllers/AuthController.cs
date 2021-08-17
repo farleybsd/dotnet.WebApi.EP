@@ -1,6 +1,8 @@
-﻿using DevIo.Api.Extensions;
+﻿using DevIo.Api.Controllers;
+using DevIo.Api.Extensions;
 using DevIo.Api.ViewModels;
 using DevIO.Business.Intefaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -12,9 +14,12 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevIo.Api.Controllers
+namespace DevIo.Api.V1.Controllers
 {
-    [Route("api")]
+    [Authorize]
+    [ApiVersion("2.0")]
+    [ApiVersion("1.0", Deprecated = true)]
+    [Route("api/v{version:apiVersion}")]
     public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -99,7 +104,7 @@ namespace DevIo.Api.Controllers
         //    return encodedToken;
         //}
 
-        private async Task<LoginResponseViewModel>GerarJwt(string Email)
+        private async Task<LoginResponseViewModel> GerarJwt(string Email)
         {
             // adicinando clains no jwt
             var user = await _userManager.FindByEmailAsync(Email);
@@ -112,7 +117,7 @@ namespace DevIo.Api.Controllers
             claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
             claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, ToUnixEpochDate(DateTime.UtcNow).ToString()));
             claims.Add(new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64));
-           
+
             foreach (var userRole in userRoles)
             {
                 claims.Add(new Claim("role", userRole));
@@ -140,9 +145,9 @@ namespace DevIo.Api.Controllers
                 ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiracaoHoras).TotalSeconds,
                 UserToken = new UserTokenViewModel
                 {
-                    Id=user.Id,
-                    Email =user.Email,
-                    Claims=claims.Select(c=> new ClaimViewModel {Type=c.Type,Value=c.Value })
+                    Id = user.Id,
+                    Email = user.Email,
+                    Claims = claims.Select(c => new ClaimViewModel { Type = c.Type, Value = c.Value })
                 }
             };
 

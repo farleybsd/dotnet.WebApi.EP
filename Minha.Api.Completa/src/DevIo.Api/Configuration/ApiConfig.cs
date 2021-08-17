@@ -15,6 +15,18 @@ namespace DevIo.Api.Configuration
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddApiVersioning(optios => {
+                optios.AssumeDefaultVersionWhenUnspecified = true;
+                optios.DefaultApiVersion = new ApiVersion(2, 0);
+                optios.ReportApiVersions = true;
+            });
+
+            services.AddVersionedApiExplorer(options => {
+
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
 

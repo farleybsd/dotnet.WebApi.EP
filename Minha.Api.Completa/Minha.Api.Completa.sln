@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Leia-me", "Leia-me", "{0747
 		Identity1.txt = Identity1.txt
 		IdentityClains.txt = IdentityClains.txt
 		JWT.txt = JWT.txt
+		Versionamento.txt = Versionamento.txt
 	EndProjectSection
 EndProject
 Global
