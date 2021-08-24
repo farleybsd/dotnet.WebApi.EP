@@ -1,0 +1,6 @@
+Na solucao da Api
+install-package Swashbuckle.aspnetCore versao 4.0.1
+
+Aleterar Startup.cs
+
+Alterar DependencyInjectionConfig

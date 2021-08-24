@@ -14,6 +14,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using DevIO.Api.Configuration;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace DevIo.Api
 {
@@ -43,7 +47,7 @@ namespace DevIo.Api
             services.AddAutoMapper(typeof(Startup));
 
             services.WebApiConfig();
-
+            services.AddSwaggerConfig();
             /*
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -64,11 +68,20 @@ namespace DevIo.Api
             
             });*/
 
+            // services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new Info
+            //    {
+            //        Title = "My API",
+            //        Version = "v1"
+
+            //    });
+            //});
             services.ResolveDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -82,13 +95,15 @@ namespace DevIo.Api
                 app.UseHsts();
             }
 
-           
+
             //app.UseCors("ApiCorsPolicy");
             //app.UseCors("Development");
             app.UseAuthentication(); // obs tem que vir antes do useMvc
-           // app.UseMvc();
+                                     // app.UseMvc();
             app.UserMvcConfiguration();
-
+            app.UseSwaggerConfig(provider);
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c => {c.SwaggerEndpoint("/swagger/v1/swagger.json","My API V1");});
         }
     }
 }
