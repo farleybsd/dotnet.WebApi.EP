@@ -1,0 +1,17 @@
+https://elmah.io/
+
+Instalar no Projeto Api
+Install-Package Elmah.Io.AspNetCore Version="3.6.63"
+
+Na pasta Configuration Criar a classe
+LoggerConfig
+
+Alterar Startup.Config
+
+Instalando o provider do elmah para coletar erros do Aspnet (Projeto Api)
+Install-Package Elmah.Io.Extensions.Logging Version="3.4.38"
+
+Middleware para tratar erros
+extensions -> ExceptionMiddleware
+
+Alterar Startup.Config

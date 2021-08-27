@@ -18,6 +18,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using DevIO.Api.Configuration;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using DevIo.Api.Extensions;
 
 namespace DevIo.Api
 {
@@ -77,6 +78,9 @@ namespace DevIo.Api
 
             //    });
             //});
+
+            //Elmah Logger
+            services.AddLoggingConfiguration();
             services.ResolveDependencies();
         }
 
@@ -100,8 +104,12 @@ namespace DevIo.Api
             //app.UseCors("Development");
             app.UseAuthentication(); // obs tem que vir antes do useMvc
                                      // app.UseMvc();
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UserMvcConfiguration();
             app.UseSwaggerConfig(provider);
+            //Elmah Logger
+            app.UseLoggingConfiguration();
             //app.UseSwagger();
             //app.UseSwaggerUI(c => {c.SwaggerEndpoint("/swagger/v1/swagger.json","My API V1");});
         }

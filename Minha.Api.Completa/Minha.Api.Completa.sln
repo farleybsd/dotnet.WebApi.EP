@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Leia-me", "Leia-me", "{0747
 		7.0 Create DB.txt = 7.0 Create DB.txt
 		8.0 Serializar Classetxt = 8.0 Serializar Classetxt
 		9.0 ValidacaoErrorConytoller.txt = 9.0 ValidacaoErrorConytoller.txt
+		elmah.txt = elmah.txt
 		Identity1.txt = Identity1.txt
 		IdentityClains.txt = IdentityClains.txt
 		JWT.txt = JWT.txt
