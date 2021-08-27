@@ -9,3 +9,4 @@ https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 Install-Package AspNetCore.HealthChecks.SqlServer (Projeto Api)
 Install-Package Microsoft.Extensions.Configuration.Abstractions -Version 5.0.0
 Install-Package AspNetCore.HealthChecks.ui
+Install-Package Elmah.Io.AspNetCore.HealthChecks
